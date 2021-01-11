@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Demo", "Jgs.Framework.Demo\Jgs.Framework.Demo.csproj", "{50A75050-D1A2-474F-9BA0-42395C2E1305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Core", "Jgs.Framework.Core\Jgs.Framework.Core.csproj", "{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Mvvm", "Jgs.Framework.Mvvm\Jgs.Framework.Mvvm.csproj", "{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50A75050-D1A2-474F-9BA0-42395C2E1305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A75050-D1A2-474F-9BA0-42395C2E1305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A75050-D1A2-474F-9BA0-42395C2E1305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A75050-D1A2-474F-9BA0-42395C2E1305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
