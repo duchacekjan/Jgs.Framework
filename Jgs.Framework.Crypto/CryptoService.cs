@@ -9,7 +9,7 @@ namespace Jgs.Framework.Crypto
     public class CryptoService
     {
         private readonly CspParameters m_cspp = new CspParameters();
-        private Operation m_operation;
+        private readonly Operation m_operation;
         private RSACryptoServiceProvider m_rsa;
         private string m_source;
         private string m_target;
@@ -85,7 +85,7 @@ namespace Jgs.Framework.Crypto
                         : CryptoServiceResult.Error(errorMessageT);
                     break;
                 default:
-                    result = CryptoServiceResult.Error("Unknown data type");
+                    result = CryptoServiceResult.Error(resx.UnknownDataType);
                     break;
             }
 
@@ -95,7 +95,7 @@ namespace Jgs.Framework.Crypto
         private bool ExecuteText(string source, out string destination, out string errorMessage)
         {
             var result = false;
-            errorMessage = "Unknown operation";
+            errorMessage = resx.UnknownOperation;
             destination = string.Empty;
 
             switch (m_operation)
@@ -115,10 +115,20 @@ namespace Jgs.Framework.Crypto
         {
             return ExecuteTextSafe(source, out destination, (s) =>
             {
+#if NET48
+                using (var sourceStream = PrepareStreamForDecryption(ToStream(s), out var blockSize, out var transform))
+                {
+                    using (var destStream = ToStream(""))
+                    {
+                        return ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+                    }
+                }
+#else
                 using var sourceStream = PrepareStreamForDecryption(ToStream(s), out var blockSize, out var transform);
                 using var destStream = ToStream("");
 
                 return ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+#endif
             }, out errorMessage);
         }
 
@@ -126,17 +136,27 @@ namespace Jgs.Framework.Crypto
         {
             return ExecuteTextSafe(source, out destination, (s) =>
             {
+#if NET48
+                using (var destStream = PrepareStreamForEncryption(ToStream(""), out var blockSize, out var transform))
+                {
+                    using (var sourceStream = ToStream(s))
+                    {
+                        return ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+                    }
+                }
+#else
                 using var destStream = PrepareStreamForEncryption(ToStream(""), out var blockSize, out var transform);
                 using var sourceStream = ToStream(s);
 
                 return ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+#endif
             }, out errorMessage);
         }
 
         private bool ExecuteFile(string source, string destination, out string errorMessage)
         {
             var result = false;
-            errorMessage = "Unknown operation";
+            errorMessage = resx.UnknownOperation;
             switch (m_operation)
             {
                 case Operation.Encrypt:
@@ -154,9 +174,19 @@ namespace Jgs.Framework.Crypto
         {
             return ExecuteFileSafe(source, destination, (s, d) =>
             {
+#if NET48
+                using (var sourceStream = PrepareStreamForDecryption(ToFileStream(source, FileMode.Open), out var blockSize, out var transform))
+                {
+                    using (var destStream = new FileStream(destination, FileMode.Create))
+                    {
+                        ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+                    }
+                }
+#else
                 using var sourceStream = PrepareStreamForDecryption(ToFileStream(source, FileMode.Open), out var blockSize, out var transform);
                 using var destStream = new FileStream(destination, FileMode.Create);
                 ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+#endif
             }, out errorMessage);
         }
 
@@ -164,14 +194,24 @@ namespace Jgs.Framework.Crypto
         {
             return ExecuteFileSafe(source, destination, (s, d) =>
             {
+#if NET48
+                using (var destStream = PrepareStreamForEncryption(ToFileStream(d, FileMode.Create), out var blockSize, out var transform))
+                {
+                    using (var sourceStream = ToFileStream(s, FileMode.Open))
+                    {
+                        ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+                    }
+                }
+#else
                 using var destStream = PrepareStreamForEncryption(ToFileStream(d, FileMode.Create), out var blockSize, out var transform);
                 using var sourceStream = ToFileStream(s, FileMode.Open);
 
                 ProcessCryptoStream(sourceStream, destStream, blockSize, transform);
+#endif
             }, out errorMessage);
         }
 
-        private bool ExecuteFileSafe(string source, string destination, Action<string, string> action, out string errorMessage)
+        private static bool ExecuteFileSafe(string source, string destination, Action<string, string> action, out string errorMessage)
         {
             var result = false;
             errorMessage = string.Empty;
@@ -208,7 +248,7 @@ namespace Jgs.Framework.Crypto
             return result;
         }
 
-        private bool ExecuteTextSafe(string source, out string destination, Func<string, string> func, out string errorMessage)
+        private static bool ExecuteTextSafe(string source, out string destination, Func<string, string> func, out string errorMessage)
         {
             var result = false;
             errorMessage = string.Empty;
@@ -293,7 +333,7 @@ namespace Jgs.Framework.Crypto
             return destination;
         }
 
-        private FileStream ToFileStream(string fileName, FileMode mode)
+        private static FileStream ToFileStream(string fileName, FileMode mode)
         {
             return new FileStream(fileName, mode);
         }
@@ -312,14 +352,13 @@ namespace Jgs.Framework.Crypto
                     data = Convert.FromBase64String(text);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(Operation));
+                    throw new ArgumentOutOfRangeException(null, nameof(Operation));
             }
             result.Write(data, 0, data.Length);
             result.Seek(0, SeekOrigin.Begin);
 
             return result;
         }
-
 
         private string FromStream(Stream stream, Encoding encoding = null)
         {
@@ -347,6 +386,34 @@ namespace Jgs.Framework.Crypto
             return result;
         }
 
+#if NET48
+        private string ProcessCryptoStream(Stream from, Stream to, int blockSize, ICryptoTransform transform)
+        {
+            var result = string.Empty;
+            using (var cryptoStream = new CryptoStream(to, transform, CryptoStreamMode.Write))
+            {
+                var count = 0;
+                var blockSizeBytes = blockSize / 8;
+                var data = new byte[blockSizeBytes];
+                var bytesRead = 0;
+
+                do
+                {
+                    count = from.Read(data, 0, blockSizeBytes);
+                    cryptoStream.Write(data, 0, count);
+                    bytesRead += blockSizeBytes;
+                }
+                while (count > 0);
+                cryptoStream.FlushFinalBlock();
+                if (to is MemoryStream ms)
+                {
+                    result = FromStream(ms);
+                }
+
+                return result;
+            }
+        }
+#else
         private string ProcessCryptoStream(Stream from, Stream to, int blockSize, ICryptoTransform transform)
         {
             var result = string.Empty;
@@ -371,5 +438,6 @@ namespace Jgs.Framework.Crypto
 
             return result;
         }
+#endif
     }
 }

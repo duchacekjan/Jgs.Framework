@@ -77,5 +77,23 @@ namespace Jgs.Framework.Crypto.Resources {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neznámý datový typ.
+        /// </summary>
+        internal static string UnknownDataType {
+            get {
+                return ResourceManager.GetString("UnknownDataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neznámá operace.
+        /// </summary>
+        internal static string UnknownOperation {
+            get {
+                return ResourceManager.GetString("UnknownOperation", resourceCulture);
+            }
+        }
     }
 }

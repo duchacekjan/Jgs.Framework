@@ -123,4 +123,10 @@
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Nesprávné heslo</value>
   </data>
+  <data name="UnknownDataType" xml:space="preserve">
+    <value>Neznámý datový typ</value>
+  </data>
+  <data name="UnknownOperation" xml:space="preserve">
+    <value>Neznámá operace</value>
+  </data>
 </root>

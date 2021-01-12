@@ -123,4 +123,10 @@
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Incorrect password</value>
   </data>
+  <data name="UnknownDataType" xml:space="preserve">
+    <value>Unknown data type</value>
+  </data>
+  <data name="UnknownOperation" xml:space="preserve">
+    <value>Unknown operation</value>
+  </data>
 </root>
