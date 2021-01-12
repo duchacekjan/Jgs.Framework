@@ -156,7 +156,7 @@ namespace Jgs.Framework.Core.Extensions
             command.ExecuteCmd<object>(null);
         }
 
-        internal static ImageSource ToImageSource(this string urlImage)
+        public static ImageSource ToImageSource(this string urlImage)
         {
             ImageSource result = null;
             if (!string.IsNullOrEmpty(urlImage))
