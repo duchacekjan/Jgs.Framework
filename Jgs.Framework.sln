@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Demo", "Jgs.Framework.Demo\Jgs.Framework.Demo.csproj", "{50A75050-D1A2-474F-9BA0-42395C2E1305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Framework.Demo", "Jgs.Framework.Demo\Jgs.Framework.Demo.csproj", "{50A75050-D1A2-474F-9BA0-42395C2E1305}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Core", "Jgs.Framework.Core\Jgs.Framework.Core.csproj", "{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Framework.Core", "Jgs.Framework.Core\Jgs.Framework.Core.csproj", "{7B3F12AB-04EE-46CE-A2AC-80FD4B220B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Mvvm", "Jgs.Framework.Mvvm\Jgs.Framework.Mvvm.csproj", "{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Framework.Mvvm", "Jgs.Framework.Mvvm\Jgs.Framework.Mvvm.csproj", "{F7C6F12C-4F9C-438D-8B1F-85014B6DB597}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Thread", "Jgs.Framework.Thread\Jgs.Framework.Thread.csproj", "{63F4494E-2E7B-48E3-AD04-330662A2220E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Framework.Thread", "Jgs.Framework.Thread\Jgs.Framework.Thread.csproj", "{63F4494E-2E7B-48E3-AD04-330662A2220E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.UI", "Jgs.Framework.UI\Jgs.Framework.UI.csproj", "{EE722FBE-2D6E-46D1-AE8A-7DFFF2B485FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Framework.UI", "Jgs.Framework.UI\Jgs.Framework.UI.csproj", "{EE722FBE-2D6E-46D1-AE8A-7DFFF2B485FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Framework.Crypto", "Jgs.Framework.Crypto\Jgs.Framework.Crypto.csproj", "{C639BDBF-A55C-4240-88C0-0A304F10401B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EE722FBE-2D6E-46D1-AE8A-7DFFF2B485FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE722FBE-2D6E-46D1-AE8A-7DFFF2B485FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE722FBE-2D6E-46D1-AE8A-7DFFF2B485FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C639BDBF-A55C-4240-88C0-0A304F10401B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C639BDBF-A55C-4240-88C0-0A304F10401B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C639BDBF-A55C-4240-88C0-0A304F10401B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C639BDBF-A55C-4240-88C0-0A304F10401B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
