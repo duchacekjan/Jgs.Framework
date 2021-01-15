@@ -1,48 +1,121 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Jgs.Framework.UI.Extensions
 {
-    public static class UIExtensions
+    /// <summary>
+    /// Extension pro komponenty
+    /// </summary>
+    public static class ComponentExtensions
     {
         /// <summary>
-        /// Získá první atribut daného typu, který je umístěn na <see cref="Enum"/> hodnotě
+        /// Doplní gradient stop jako <paramref name="offset"/> z <paramref name="color"/>
         /// </summary>
-        /// <typeparam name="T">Typ hledaného atributu</typeparam>
-        /// <param name="enumValue">Zkoumaná hodnota</param>
+        /// <param name="brush"></param>
+        /// <param name="color"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
-        public static T GetAttribute<T>(this Enum enumValue)
-            where T : Attribute
+        public static LinearGradientBrush AddGradient(this LinearGradientBrush brush, Color color, double offset = 1)
         {
-            var type = enumValue.GetType();
-            var name = Enum.GetName(type, enumValue);
-            return name.GetEnumAttribute<T>(type);
+            if (brush != null)
+            {
+                var gradient = new GradientStop(color, offset);
+                brush.GradientStops.Add(gradient);
+            }
+            return brush;
         }
 
         /// <summary>
-        /// Získá první atribut daného typu, který je umístěn na <see cref="Enum"/> hodnotě
+        /// Vrátí HWND na okno, ve kterém se nachází element
         /// </summary>
-        /// <typeparam name="T">Typ hledaného atributu</typeparam>
-        /// <param name="enumValue">Zkoumaná hodnota</param>
+        /// <param name="element"></param>
         /// <returns></returns>
-        public static T GetEnumAttribute<T>(this string enumValue, Type enumType)
-            where T : Attribute
+        public static IntPtr GetHWND(this DependencyObject element)
         {
-            T result = null;
-            if (!string.IsNullOrEmpty(enumValue))
+            var window = Window.GetWindow(element);
+            var result = IntPtr.Zero;
+            if (window != null)
             {
-                var prop = enumType.GetMember(enumValue).FirstOrDefault();
-                if (prop?.GetCustomAttributes(typeof(T), false).FirstOrDefault() is T attr)
+                result = new WindowInteropHelper(window).EnsureHandle();
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Nastaví hodnotu property na jiném vlákně, aby došlo ke správnému propsání zpět do modelu.
+        /// Hlavní využití je pro coerce nastavované hodnoty z modelu
+        /// </summary>
+        /// <typeparam name="TClass">Třída, na které se nachází DependencyProperty</typeparam>
+        /// <typeparam name="TProperty">DependencyProperty (její hodnota)</typeparam>
+        /// <param name="source"></param>
+        /// <param name="expr"></param>
+        /// <param name="value"></param>
+        public static void SetPropertyBackToModel<TClass, TProperty>(this TClass source, Expression<Func<TClass, TProperty>> expr, TProperty value)
+            where TClass : DependencyObject
+        {
+            source?.Dispatcher?.InvokeOnBackground(() =>
+            {
+                if (expr.Body is MemberExpression member)
                 {
-                    result = attr;
+                    if (member.Member is PropertyInfo propInfo)
+                    {
+                        propInfo.SetValue(source, value);
+                    }
                 }
+            });
+        }
+
+        /// <summary>
+        /// Vyvolání akce na UI vlákně
+        /// </summary>
+        /// <param name="dispatcher"></param>
+        /// <param name="action"></param>
+        private static void InvokeOnBackground(this Dispatcher dispatcher, Action action)
+        {
+            Task.Run(async () =>
+            {
+                await Task.CompletedTask;
+                dispatcher?.Invoke(action);
+            });
+        }
+
+        /// <summary>
+        /// Nahradí první nalezený substring
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="search"></param>
+        /// <param name="replace"></param>
+        /// <returns></returns>
+        public static string ReplaceFirst(this string text, string search, string replace)
+        {
+            return text.ReplaceFirst(search, replace, 0);
+        }
+
+        /// <summary>
+        /// Nahradí první nalezený substring
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="search"></param>
+        /// <param name="replace"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public static string ReplaceFirst(this string text, string search, string replace, int offset)
+        {
+            var result = text;
+            const string pattern = "^(.*?){0}";
+            if (!string.IsNullOrEmpty(replace))
+            {
+                var regex = new System.Text.RegularExpressions.Regex(string.Format(pattern, search));
+                result = regex.Replace(text, replace, 1, offset);
             }
 
             return result;
@@ -156,7 +229,12 @@ namespace Jgs.Framework.UI.Extensions
             command.ExecuteCmd<object>(null);
         }
 
-        public static ImageSource ToImageSource(this string urlImage)
+        /// <summary>
+        /// Převede url na ImageSource
+        /// </summary>
+        /// <param name="urlImage"></param>
+        /// <returns></returns>
+        public static ImageSource UrlAsImageSource(this string urlImage)
         {
             ImageSource result = null;
             if (!string.IsNullOrEmpty(urlImage))
@@ -175,15 +253,31 @@ namespace Jgs.Framework.UI.Extensions
             return result;
         }
 
+        /// <summary>
+        /// Vrátí barvu <paramref name="dark"/> nebo <paramref name="light"/>, podle toho, která je více kontrastní k <paramref name="brush"/>.
+        /// Výchozí hodnoty jsou <paramref name="dark"/>=<see cref="Colors.Black"/> a <paramref name="light"/>=<see cref="Colors.White"/>
+        /// </summary>
+        /// <param name="brush"></param>
+        /// <param name="dark"></param>
+        /// <param name="light"></param>
+        /// <returns></returns>
         public static Color ContrastColor(this Brush brush, Color? dark = null, Color? light = null)
         {
             var original = (SolidColorBrush)brush;
             return ContrastColor(original.Color, dark, light);
         }
 
-        public static Color ContrastColor(this Color iColor, Color? dark = null, Color? light = null)
+        /// <summary>
+        /// Vrátí barvu <paramref name="dark"/> nebo <paramref name="light"/>, podle toho, která je více kontrastní k <paramref name="color"/>.
+        /// Výchozí hodnoty jsou <paramref name="dark"/>=<see cref="Colors.Black"/> a <paramref name="light"/>=<see cref="Colors.White"/>
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="dark"></param>
+        /// <param name="light"></param>
+        /// <returns></returns>
+        public static Color ContrastColor(this Color color, Color? dark = null, Color? light = null)
         {
-            var luma = ((0.299 * iColor.R) + (0.587 * iColor.G) + (0.114 * iColor.B)) / 255;
+            var luma = ((0.299 * color.R) + (0.587 * color.G) + (0.114 * color.B)) / 255;
 #if NET48
             dark = dark ?? Colors.Black;
             light = light ?? Colors.White;

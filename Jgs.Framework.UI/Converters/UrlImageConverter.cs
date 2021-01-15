@@ -13,7 +13,7 @@ namespace Jgs.Framework.UI.Converters
             var result = DependencyProperty.UnsetValue;
             if (value is string urlImage && targetType==typeof(ImageSource))
             {
-                result = urlImage.ToImageSource();
+                result = urlImage.UrlAsImageSource();
             }
 
             return result;

@@ -22,7 +22,7 @@ namespace Jgs.Framework.UI.Markup
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ImageLink?.ToImageSource();
+            return ImageLink?.UrlAsImageSource();
         }
     }
 }
