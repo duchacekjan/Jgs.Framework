@@ -6,6 +6,8 @@
         <ResourceDictionary Source="/Jgs.UI;component/Themes/TextBox.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/BrowseInput/BrowseInput.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/LoginView/LoginView.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/PageNavigator/PageNavigator.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/PathButton/PathButton.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/PathToggleButton/PathToggleButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
