@@ -12,5 +12,6 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("jgs:wpf.controls", "Jgs.Framework.UI.Components")]
 [assembly: XmlnsDefinition("jgs:wpf.converters", "Jgs.Framework.UI.Converters")]
-[assembly: XmlnsDefinition("jgs:wpf.markup", "Jgs.Framework.UI.Markup")]
 [assembly: XmlnsDefinition("jgs:wpf.extensions", "Jgs.Framework.UI.Extensions")]
+[assembly: XmlnsDefinition("jgs:wpf.markup", "Jgs.Framework.UI.Markup")]
+[assembly: XmlnsDefinition("jgs:wpf.resx", "Jgs.Framework.UI.Resources")]
