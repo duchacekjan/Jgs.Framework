@@ -2,70 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:Jgs.Framework.UI.Components"
                     xmlns:cnv="clr-namespace:Jgs.Framework.UI.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Button.xaml"/>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Colors.xaml"/>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/TextBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type c:BrowseInput}">
-        <Style.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Button.xaml"/>
-                    <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Colors.xaml"/>
-                    <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/TextBox.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                <Style TargetType="{x:Type TextBox}"
-                       BasedOn="{StaticResource BorderlessTextbox}">
-                    <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-                </Style>
-                <Style TargetType="{x:Type Button}"
-                       BasedOn="{StaticResource BaseButton}">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="OverridesDefaultStyle" Value="True"/>
-                    <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrush}"/>
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border BorderBrush="{StaticResource ButtonBorderBrush}"
-                                        BorderThickness="1,0,0,0"
-                                        Background="Transparent"
-                                        Padding="2"
-                                        x:Name="MouseOverBorder">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="0,4,4,0"
-                                            x:Name="border">
-                                        <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}"
-                                                          VerticalAlignment="Center"
-                                                          x:Name="PART_Content"
-                                                          Margin="4,0"/>
-                                    </Border>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource ButtonPressedBackgroundBrush}" TargetName="MouseOverBorder"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Padding" Value="0" TargetName="MouseOverBorder"/>
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ResourceDictionary>
-        </Style.Resources>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{StaticResource ControlBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrush}"/>
         <Setter Property="MinHeight" Value="22"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:BrowseInput}">
-                    <DockPanel>
+                    <DockPanel Focusable="False">
                         <Label Content="{TemplateBinding Label}"
                                Padding="4,2"
                                DockPanel.Dock="Top"
@@ -75,6 +26,7 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"
                                 CornerRadius="2"
+                                Focusable="False"
                                 Padding="1"
                                 DockPanel.Dock="Bottom"
                                 x:Name="PART_MouseOver">
@@ -86,11 +38,14 @@
                                 <DockPanel>
                                     <Button DockPanel.Dock="Right"
                                             x:Name="PART_Browse"
+                                            Style="{StaticResource BrowseButton}"
                                             Content="{TemplateBinding BrowseButtonLabel}"
                                             ToolTip="{TemplateBinding BrowseButtonLabelTooltip}"/>
                                     <TextBox x:Name="PART_Input"
                                              MinHeight="20"
-                                             IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UserCanWrite, Converter={cnv:NotConverter}}">
+                                             IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UserCanWrite, Converter={cnv:NotConverter}}"
+                                             Style="{StaticResource BorderlessTextbox}"
+                                             ToolTipService.ShowOnDisabled="True">
                                     </TextBox>
                                 </DockPanel>
                             </Border>
