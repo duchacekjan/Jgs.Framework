@@ -52,7 +52,11 @@ namespace Jgs.Framework.UI.FileOpenDialog
             if (pickFolders)
             {
                 var options = Invoke<uint>(fileDialogType, openFileDialog, GetOptions);
+#if NET5_0
                 options |= GetFOSValue(fileDialogType, PickFolders);
+#else
+                options |= GetFOSValue(PickFolders);
+#endif
                 Invoke(typeIFileDialog, dialog, SetOptions, options);
             }
             var pfde = Create(FileDialogVistaDialogEvents, openFileDialog);
@@ -84,26 +88,32 @@ namespace Jgs.Framework.UI.FileOpenDialog
             var methInfo = type.GetMethod(func, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             methInfo.Invoke(obj, parameters);
         }
-
-        private static uint GetFOSValue(Type fileDialogType, string name)
-        {
 #if NET5_0
-            var type = fileDialogType.GetMethod(GetOptions, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .ReturnType;
-#else
-            var type = GetType(FileDialogNativeFOS);
-#endif
-            var fieldInfo = type.GetField(name);
-            return (uint)fieldInfo.GetValue(null);
-        }
-
         private static Type GetIFileDialogType(Type fileDialogType)
         {
             return fileDialogType.GetMethod(CreateVistaDialog, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                 .ReturnType;
         }
+#endif
 
-        private Type GetType(string typeName)
+#if NET5_0
+        private static uint GetFOSValue(Type fileDialogType, string name)
+        {
+            var type = fileDialogType.GetMethod(GetOptions, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .ReturnType;
+            var fieldInfo = type.GetField(name);
+            return (uint)fieldInfo.GetValue(null);
+        }
+#else
+        private uint GetFOSValue(string name)
+        {
+            var type = GetType(FileDialogNativeFOS);
+            var fieldInfo = type.GetField(name);
+            return (uint)fieldInfo.GetValue(null);
+        }
+#endif
+
+            private Type GetType(string typeName)
         {
             return m_winFormsAssembly.GetType($"{m_namespace}.{typeName}");
         }

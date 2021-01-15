@@ -3,6 +3,7 @@
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Button.xaml"/>
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Colors.xaml"/>
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Vectors.xaml"/>
-        <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/TextBox.xaml"/>        
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/TextBox.xaml"/>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Components/BrowseInput/BrowseInput.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
