@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.RawSQL", "Jgs.RawSQL\Jgs.RawSQL.csproj", "{F7D98517-2D25-4E8C-8CED-C65F8E860DF7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Crypto", "Jgs.Crypto\Jgs.Crypto.csproj", "{B733EC9F-D9E2-401C-AA2E-A70DAFF8A6D5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Thread", "Jgs.Thread\Jgs.Thread.csproj", "{51DBEFC2-87B0-4512-8665-FCAC50CA2BF6}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F7D98517-2D25-4E8C-8CED-C65F8E860DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7D98517-2D25-4E8C-8CED-C65F8E860DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7D98517-2D25-4E8C-8CED-C65F8E860DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7D98517-2D25-4E8C-8CED-C65F8E860DF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B733EC9F-D9E2-401C-AA2E-A70DAFF8A6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B733EC9F-D9E2-401C-AA2E-A70DAFF8A6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B733EC9F-D9E2-401C-AA2E-A70DAFF8A6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
