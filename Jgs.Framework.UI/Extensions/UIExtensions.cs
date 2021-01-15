@@ -175,6 +175,25 @@ namespace Jgs.Framework.UI.Extensions
             return result;
         }
 
+        public static Color ContrastColor(this Brush brush, Color? dark = null, Color? light = null)
+        {
+            var original = (SolidColorBrush)brush;
+            return ContrastColor(original.Color, dark, light);
+        }
+
+        public static Color ContrastColor(this Color iColor, Color? dark = null, Color? light = null)
+        {
+            var luma = ((0.299 * iColor.R) + (0.587 * iColor.G) + (0.114 * iColor.B)) / 255;
+#if NET48
+            dark = dark ?? Colors.Black;
+            light = light ?? Colors.White;
+#else
+            dark ??= Colors.Black;
+            light ??= Colors.White;
+#endif
+            return luma > 0.5 ? dark.Value : light.Value;
+        }
+
         /// <summary>
         /// Extract <see cref="PropertyInfo"/> from given <see cref="Expression{TDelegate}"/>
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jgs.Framework.UI.Extensions;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
@@ -17,10 +18,10 @@ namespace Jgs.Framework.UI.Converters
             switch (value)
             {
                 case Brush brush:
-                    result = ContrastColor(brush);
+                    result = brush.ContrastColor(Dark, Light);
                     break;
                 case Color color:
-                    result = ContrastColor(color);
+                    result = color.ContrastColor(Dark, Light);
                     break;
             }
 
@@ -42,18 +43,6 @@ namespace Jgs.Framework.UI.Converters
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;
-        }
-
-        private Color ContrastColor(Brush brush)
-        {
-            var original = (SolidColorBrush)brush;
-            return ContrastColor(original.Color);
-        }
-
-        private Color ContrastColor(Color iColor)
-        {
-            var luma = ((0.299 * iColor.R) + (0.587 * iColor.G) + (0.114 * iColor.B)) / 255;
-            return luma > 0.5 ? Dark : Light;
         }
     }
 }
