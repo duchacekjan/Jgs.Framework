@@ -12,5 +12,7 @@
         <ResourceDictionary Source="/Jgs.UI;component/Components/SpinEdit/SpinEdit.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/Strip/Strip.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/SuggestionInput/SuggestionInput.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/TagControl/Tag.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/TagControl/TagControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -180,4 +180,10 @@
   <data name="SuggestionInputWatermark" xml:space="preserve">
     <value>Zadejte text</value>
   </data>
+  <data name="TagControlItemsHasToBeEmpty" xml:space="preserve">
+    <value>Kolekce Items musí být prázdná</value>
+  </data>
+  <data name="TagControlItemsSourceHasToBeNotUsed" xml:space="preserve">
+    <value>Kolekce ItemsSource nesmí být použita</value>
+  </data>
 </root>

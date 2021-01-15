@@ -248,5 +248,23 @@ namespace Jgs.UI.Resources {
                 return ResourceManager.GetString("SuggestionInputWatermark", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kolekce Items musí být prázdná.
+        /// </summary>
+        public static string TagControlItemsHasToBeEmpty {
+            get {
+                return ResourceManager.GetString("TagControlItemsHasToBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kolekce ItemsSource nesmí být použita.
+        /// </summary>
+        public static string TagControlItemsSourceHasToBeNotUsed {
+            get {
+                return ResourceManager.GetString("TagControlItemsSourceHasToBeNotUsed", resourceCulture);
+            }
+        }
     }
 }

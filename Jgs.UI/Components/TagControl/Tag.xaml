@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:Jgs.UI.Components" 
+                    xmlns:resx="clr-namespace:Jgs.UI.Resources" 
+                    xmlns:cnv="clr-namespace:Jgs.UI.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/Button.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="{x:Type c:Tag}">
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Background, Converter={cnv:ContrastColorConverter}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type  c:Tag}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            x:Name="PART_Border"
+                            CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type c:Tag}, Mode=FindAncestor}, Path=ActualHeight, Converter={cnv:RatioConverter Ratio=0.5}}">
+                        <DockPanel>
+                            <Button x:Name="PART_CloseButton"
+                                    DockPanel.Dock="Right"
+                                    ToolTip="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type c:Tag}}, Path=CloseButtonTooltip, TargetNullValue={x:Static resx:Resources.CloseTagTooltip}}"
+                                    Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type c:Tag}}, Path=Background, Converter={cnv:ContrastColorConverter Dark={StaticResource CrossColorColor}}}"
+                                    Style="{StaticResource BaseRoundCloseButton}"/>
+                            <Viewbox MinHeight="4"
+                                     MinWidth="8"
+                                     x:Name="PART_ViewBox"
+                                     Stretch="Uniform"
+                                     StretchDirection="Both"
+                                     VerticalAlignment="Center"
+                                     Margin="8,2,4,2">
+                                <TextBlock Text="{TemplateBinding Text}"
+                                           FontWeight="Bold"
+                                           Foreground="{TemplateBinding Foreground}"/>
+                            </Viewbox>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
