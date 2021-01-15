@@ -1,0 +1,184 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:Jgs.UI.Components">  
+    <!--SpinEdit-->
+    <Style TargetType="{x:Type c:SpinEdit}">
+        <Style.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/Jgs.UI;component/Themes/Button.xaml"/>
+                    <ResourceDictionary Source="/Jgs.UI;component/Themes/Colors.xaml"/>
+                    <ResourceDictionary Source="/Jgs.UI;component/Themes/TextBox.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+                <!--Obecny focus-->
+                <Style x:Key="FocusVisual">
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{StaticResource FocusVisualStrokeBrush}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <!--ButtonBase-->
+                <Style x:Key="BaseButtonStyle" TargetType="{x:Type ButtonBase}">
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="1"/>
+                </Style>
+                <!--RepeatButton-->
+                <Style x:Key="RepeatButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" TargetType="{x:Type RepeatButton}">
+                    <Setter Property="Margin" Value="2 0 0 0"/>
+                    <Setter Property="Stylus.IsPressAndHoldEnabled" Value="True"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+                <Style x:Key="BasePath" TargetType="{x:Type Path}">
+                    <Setter Property="Fill" Value="{StaticResource SpinEditForegroundBrush}"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="Stretch" Value="Uniform"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>           
+                </Style>
+
+                <Style x:Key="UpArrow" TargetType="{x:Type Path}"
+                       BasedOn="{StaticResource BasePath}">
+                    <Setter Property="Data" Value="F1 M 4,0 8,4 7,4 4,1 1,4 0,4 Z "/>
+                    <Setter Property="Margin" Value="0,0,0,1"/>
+                </Style>
+
+                <Style x:Key="DownArrow" TargetType="{x:Type Path}"
+                       BasedOn="{StaticResource BasePath}">
+                    <Setter Property="Data" Value="F1 M 0,0 4,4 8,0 7,0 4,3 1,0 0,0 Z "/>
+                    <Setter Property="Margin" Value="0,1,0,0"/>
+                </Style>
+
+                <!--ButtonUp-->
+                <ControlTemplate x:Key="ButtonUp" TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent"
+                            CornerRadius="0,4,0,0"
+                            MinWidth="20"
+                            Margin="0,-1,-1,0"
+                            x:Name="PART_Root">
+                        <Path x:Name="Ico" Style="{StaticResource UpArrow}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource SpinEditMouseOverBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource SpinEditMouseOverBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Fill" TargetName="Ico" Value="{StaticResource SpinEditPressedBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Fill" TargetName="Ico" Value="{StaticResource DisabledForegroundBrush}"/>
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource DisabledBackgroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+                <!--ButtonDown-->
+                <ControlTemplate x:Key="ButtonDown" TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent"
+                            CornerRadius="0,0,4,0"
+                            MinWidth="20"
+                            Margin="0,0,-1,-1"
+                            x:Name="PART_Root">
+                        <Path x:Name="Ico" Style="{StaticResource DownArrow}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource SpinEditMouseOverBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource SpinEditMouseOverBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Fill" TargetName="Ico" Value="{StaticResource SpinEditPressedBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Fill" TargetName="Ico" Value="{StaticResource DisabledForegroundBrush}"/>
+                            <Setter Property="Background" TargetName="PART_Root" Value="{StaticResource DisabledBackgroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+                <!--TextBoxInner-->
+                <Style x:Key="TextBoxInner" TargetType="TextBox">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </ResourceDictionary>
+        </Style.Resources>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Padding" Value="4,0,0,0" />
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:SpinEdit}">
+                    <Border Name="Border" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="4" 
+                            Padding="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox x:Name="PART_DisplayValue"
+                                     Grid.Column="0"
+                                     Grid.Row="0"
+                                     Grid.RowSpan="2"
+                                     Style="{StaticResource TextBoxInner}"/>
+                            <TextBox x:Name="PART_Editor"
+                                     Grid.Column="0"
+                                     Grid.Row="0"
+                                     Grid.RowSpan="2"
+                                     Style="{StaticResource TextBoxInner}"
+                                     Visibility="Collapsed"/>
+                            <RepeatButton Grid.Column="1"
+                                          Grid.Row="0"
+                                          x:Name="PART_Up"
+                                          Template="{StaticResource ButtonUp}"
+                                          Style="{StaticResource RepeatButtonStyle}"/>
+                            <RepeatButton Grid.Column="1"
+                                          Grid.Row="1"
+                                          x:Name="PART_Down"
+                                          Template="{StaticResource ButtonDown}"
+                                          Style="{StaticResource RepeatButtonStyle}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Padding" Value="1" />
+                            <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

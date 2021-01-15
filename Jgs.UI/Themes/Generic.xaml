@@ -9,5 +9,6 @@
         <ResourceDictionary Source="/Jgs.UI;component/Components/PageNavigator/PageNavigator.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/PathButton/PathButton.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/PathToggleButton/PathToggleButton.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/SpinEdit/SpinEdit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
