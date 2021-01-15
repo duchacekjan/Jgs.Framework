@@ -7,6 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Jgs.Thread\Jgs.Thread.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Compile Update="Resources\Resources.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>

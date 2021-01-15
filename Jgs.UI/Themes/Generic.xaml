@@ -11,5 +11,6 @@
         <ResourceDictionary Source="/Jgs.UI;component/Components/PathToggleButton/PathToggleButton.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/SpinEdit/SpinEdit.xaml"/>
         <ResourceDictionary Source="/Jgs.UI;component/Components/Strip/Strip.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/SuggestionInput/SuggestionInput.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
