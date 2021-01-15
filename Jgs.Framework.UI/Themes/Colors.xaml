@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#cccccc"/>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#f5f6f7"/>
+    <Color x:Key="DisabledForegroundColor">#e5e5e5</Color>
+    <Color x:Key="DisabledBackgroundColor">#f5f6f7</Color>
+    <SolidColorBrush x:Key="SelectionBrush" Color="#29a6fa"/>
+    <SolidColorBrush x:Key="ControlBackground" Color="#ffffff"/>
+
+    <!--BUTTON-->
+    <SolidColorBrush x:Key="ButtonPressedBackgroundBrush" Color="#e5e5e5"/>
+    <SolidColorBrush x:Key="ButtonUndeterminedBackgroundBrush" Color="#e5e5e5"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="#ababab"/>
+    <!--VOLUME-->
+    <SolidColorBrush x:Key="VolumeBackgroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="VolumeDisabledBrush" Color="#e5e5e5"/>
+    <Color x:Key="VolumeDisabledColor">#e5e5e5</Color>
+    <Color x:Key="VolumeNormalLevelColor">LimeGreen</Color>
+    <Color x:Key="VolumeHigherLevelColor">Yellow</Color>
+    <Color x:Key="VolumeHighestLevelColor">Red</Color>
+    <Color x:Key="VolumeEmptyLevelColor">Transparent</Color>
+    <!--SPIN EDIT-->
+    <SolidColorBrush x:Key="FocusVisualStrokeBrush" Color="#9b000000"/>
+    <SolidColorBrush x:Key="SpinEditForegroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="SpinEditMouseOverBackgroundBrush" Color="#e5e5e5"/>
+    <SolidColorBrush x:Key="SpinEditPressedBackgroundBrush" Color="#cccccc"/>
+    <SolidColorBrush x:Key="SpinEditBackgroundBrush" Color="#ededef"/>
+    <!--LOGIN VIEW-->
+    <SolidColorBrush x:Key="LoginButonForegroundBrush" Color="#ffffff"/>
+    <SolidColorBrush x:Key="LoginButonBackgroundBrush" Color="#2ea44f"/>
+    <SolidColorBrush x:Key="LoginButonBorderBrush" Color="#299347"/>
+    <SolidColorBrush x:Key="LoginButonPressedBrush" Color="#299347"/>
+    <SolidColorBrush x:Key="AnonymousButonForegroundBrush" Color="#ffffff"/>
+    <SolidColorBrush x:Key="AnonymousButonBackgroundBrush" Color="#455da1"/>
+    <SolidColorBrush x:Key="AnonymousButonBorderBrush" Color="#2b4387"/>
+    <SolidColorBrush x:Key="AnonymousButonPressedBrush" Color="#2b4387"/>
+    <SolidColorBrush x:Key="ErrorMessageForeground" Color="#ff0000"/>
+    <SolidColorBrush x:Key="ErrorMessageBackground" Color="#0fff0000"/>
+
+    <SolidColorBrush x:Key="CrossColor">#FB4A46</SolidColorBrush>
+    <Color x:Key="CrossColorColor">#FB4A46</Color>
+    <SolidColorBrush x:Key="CrossFocusColor">#ED1D25</SolidColorBrush>
+    <Color x:Key="CrossFocusColorColor">#ED1D25</Color>
+    <SolidColorBrush x:Key="BorderBrush">#ababab</SolidColorBrush>
+    <SolidColorBrush x:Key="Background">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="FocusedBorderBrush">#ababab</SolidColorBrush>
+    <SolidColorBrush x:Key="DisabledBorderBrush">#ababab</SolidColorBrush>
+    <SolidColorBrush x:Key="ItemHighlightBrush">#29A6FA</SolidColorBrush>
+</ResourceDictionary>
