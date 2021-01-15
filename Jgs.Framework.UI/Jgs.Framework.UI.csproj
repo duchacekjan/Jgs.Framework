@@ -7,11 +7,6 @@
 
     <ItemGroup>
         <Folder Include="Components\" />
-        <Folder Include="Extensions\" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Jgs.Framework.Core\Jgs.Framework.Core.csproj" />
     </ItemGroup>
 
 </Project>

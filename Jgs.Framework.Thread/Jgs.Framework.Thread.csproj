@@ -6,9 +6,6 @@
   </PropertyGroup>
 
     <!--TODO Release = PackageReference-->
-  <ItemGroup>
-    <ProjectReference Include="..\Jgs.Framework.Core\Jgs.Framework.Core.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\Resources.Designer.cs">

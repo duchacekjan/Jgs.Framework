@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Jgs.Framework.Core.Extensions
+namespace Jgs.Framework.UI.Extensions
 {
     public static class UIExtensions
     {

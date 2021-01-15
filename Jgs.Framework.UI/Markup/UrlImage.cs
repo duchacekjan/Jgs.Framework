@@ -1,4 +1,4 @@
-﻿using Jgs.Framework.Core.Extensions;
+﻿using Jgs.Framework.UI.Extensions;
 using System;
 using System.Windows.Markup;
 using System.Windows.Media;
