@@ -5,5 +5,7 @@
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/Vectors.xaml"/>
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Themes/TextBox.xaml"/>
         <ResourceDictionary Source="/Jgs.Framework.UI;component/Components/BrowseInput/BrowseInput.xaml"/>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Components/BrowseInput/LoginView.xaml"/>
+        <ResourceDictionary Source="/Jgs.Framework.UI;component/Components/BrowseInput/PathToggleButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

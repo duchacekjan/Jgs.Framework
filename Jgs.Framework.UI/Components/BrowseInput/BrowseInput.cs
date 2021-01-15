@@ -1,4 +1,5 @@
-﻿using Jgs.Framework.UI.Extensions;
+﻿using Jgs.Framework.UI.Components.BrowseInputCore;
+using Jgs.Framework.UI.Extensions;
 using Jgs.Framework.UI.FileOpenDialog;
 using System.Collections.Generic;
 using System.Windows;
