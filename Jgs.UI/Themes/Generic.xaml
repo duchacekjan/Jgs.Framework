@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/Button.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/Colors.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/Vectors.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Themes/TextBox.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/BrowseInput/BrowseInput.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/BrowseInput/LoginView.xaml"/>
+        <ResourceDictionary Source="/Jgs.UI;component/Components/BrowseInput/PathToggleButton.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
