@@ -27,10 +27,10 @@ namespace Jgs.RawSQLBuilder.Core
             return this;
         }
 
-        public IWhere And(ConditionOperator conditionOperator, params string[] conditions)
+        public IWhere And(ConditionOperator operatorBetweenConditions, params string[] conditions)
         {
 
-            Add(conditionOperator, ConditionOperator.And, conditions);
+            Add(operatorBetweenConditions, ConditionOperator.And, conditions);
             return this;
         }
 
@@ -40,9 +40,9 @@ namespace Jgs.RawSQLBuilder.Core
             return this;
         }
 
-        public IWhere Or(ConditionOperator conditionOperator, params string[] conditions)
+        public IWhere Or(ConditionOperator operatorBetweenConditions, params string[] conditions)
         {
-            Add(conditionOperator, ConditionOperator.Or, conditions);
+            Add(operatorBetweenConditions, ConditionOperator.Or, conditions);
             return this;
         }
 
