@@ -34,6 +34,31 @@ namespace Jgs.RawSQLBuilder.Core
             return new WhereBuilder(this, condition);
         }
 
+        public IWhere WhereExists(string selectQuery)
+        {
+            return WhereExists(false, selectQuery);
+        }
+
+        public IWhere WhereNotExists(string selectQuery)
+        {
+            return WhereExists(true, selectQuery);
+        }
+
+        private IWhere WhereExists(bool negate, string selectQuery)
+        {
+            if (string.IsNullOrEmpty(selectQuery))
+            {
+                throw new System.ArgumentNullException(nameof(selectQuery));
+            }
+            var not = string.Empty;
+            if (negate)
+            {
+                not = "NOT ";
+            }
+            var exists = $"{not}EXISTS ({selectQuery})";
+            return new WhereBuilder(this, exists);
+        }
+
         private string GetSql()
         {
             var fields = m_fields ?? new string[] { "*" };

@@ -5,5 +5,9 @@
         IFrom From(string tableName, string alias = null);
 
         IWhere Where(string condition);
+
+        IWhere WhereExists(string selectQuery);
+
+        IWhere WhereNotExists(string selectQuery);
     }
 }

@@ -40,5 +40,29 @@ namespace Jgs.RawSQLBuilder.Tests
 
             actual.Should().Be("SELECT a FROM t WHERE 1=0 AND a=5 OR b=0 AND 1=1");
         }
+
+        [Fact]
+        public void ShouldBeCorrectSelectClauseWithWhereExists()
+        {
+            var actual = Query
+                .Select("a")
+                .From("t")
+                .WhereExists("select * from data where data.a=b")
+                .SQL;
+
+            actual.Should().Be("SELECT a FROM t WHERE EXISTS (select * from data where data.a=b)");
+        }
+
+        [Fact]
+        public void ShouldBeCorrectSelectClauseWithWhereNotExists()
+        {
+            var actual = Query
+                .Select("a")
+                .From("t")
+                .WhereNotExists("select * from data where data.a=b")
+                .SQL;
+
+            actual.Should().Be("SELECT a FROM t WHERE NOT EXISTS (select * from data where data.a=b)");
+        }
     }
 }
