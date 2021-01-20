@@ -5,9 +5,9 @@ namespace Jgs.RawSQLBuilder
 {
     public static class Query
     {
-        public static IFrom Select(params string[] fields)
+        public static IFrom Select(string field, params string[] fields)
         {
-            return new SelectClause(fields);
+            return new SelectClause(field, fields);
         }
     }
 }

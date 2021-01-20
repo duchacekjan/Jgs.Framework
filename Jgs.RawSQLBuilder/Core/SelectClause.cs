@@ -1,16 +1,30 @@
 ﻿using Jgs.RawSQLBuilder.Core.Interfaces;
+using System.Collections.Generic;
 
 namespace Jgs.RawSQLBuilder.Core
 {
     internal class SelectClause : IFrom
     {
-        private readonly string[] m_fields;
+        private readonly List<string> m_fields;
         private string m_tableName;
         private string m_tableAlias;
 
-        public SelectClause(params string[] fields)
+        public SelectClause(string field, params string[] fields)
         {
-            m_fields = fields;
+            if (string.IsNullOrEmpty(field))
+            {
+                field = "*";
+            }
+
+            m_fields = new List<string>
+            {
+                field
+            };
+
+            if (fields?.Length > 0)
+            {
+                m_fields.AddRange(fields);
+            }
         }
 
         public string SQL => GetSql();
@@ -31,15 +45,14 @@ namespace Jgs.RawSQLBuilder.Core
 
         private string GetSql()
         {
-            var fields = m_fields ?? new string[] { "*" };
-            var fieldsSql = string.Join(", ", fields);
+            var fields = string.Join(", ", m_fields);
             var tableName = m_tableName;
             if (!string.IsNullOrEmpty(m_tableAlias))
             {
                 tableName += $" as {m_tableAlias}";
             }
 
-            return $"SELECT {fieldsSql} FROM {tableName}";
+            return $"SELECT {fields} FROM {tableName}";
         }
     }
 }
