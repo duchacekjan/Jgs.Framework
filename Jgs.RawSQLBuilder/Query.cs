@@ -9,5 +9,10 @@ namespace Jgs.RawSQLBuilder
         {
             return new SelectClause(field, fields);
         }
+
+        public static ISelect Select()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

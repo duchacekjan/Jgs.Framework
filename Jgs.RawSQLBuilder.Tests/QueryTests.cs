@@ -79,6 +79,9 @@ namespace Jgs.RawSQLBuilder.Tests
         [Fact]
         public void ShouldBeCorrectSelectClauseWithDistinct()
         {
+            Query.Select().All();
+            Query.Select().Distinct("a").Field("b").As("x").Fields("h");
+            Query.Select().Count("a").Field("");
             //var actual = Query
             //    .SelectDistinct("a")
             //    .From("t")
