@@ -8,23 +8,110 @@ namespace Jgs.RawSQLBuilder.Core
     internal class WhereBuilder : IWhere
     {
         private readonly IFrom m_from;
-        private List<ICondition> m_conditions;
+        private readonly List<Condition> m_conditions;
 
-        public WhereBuilder(IFrom from, params string[] conditions)
+        public WhereBuilder(IFrom from, string condition)
         {
             m_from = from ?? throw new ArgumentNullException(nameof(from));
-            m_conditions = new List<ICondition>
+            m_conditions = new List<Condition>
             {
-                new ConditionBuilder(ConditionOperator.And, conditions) 
+                new Condition(condition)
             };
         }
 
         public string SQL => GetSql();
 
+        public IWhere And(string condition)
+        {
+            Add(null, ConditionOperator.And, condition);
+            return this;
+        }
+
+        public IWhere And(ConditionOperator conditionOperator, params string[] conditions)
+        {
+
+            Add(conditionOperator, ConditionOperator.And, conditions);
+            return this;
+        }
+
+        public IWhere Or(string condition)
+        {
+            Add(null, ConditionOperator.Or, condition);
+            return this;
+        }
+
+        public IWhere Or(ConditionOperator conditionOperator, params string[] conditions)
+        {
+            Add(conditionOperator, ConditionOperator.Or, conditions);
+            return this;
+        }
+
+        private void Add(ConditionOperator? conditionInnerOperator, ConditionOperator? conditionOuterOperator, params string[] conditions)
+        {
+            m_conditions.Add(new Condition(conditionInnerOperator ?? ConditionOperator.And, conditions, conditionOuterOperator));
+        }
+
         private string GetSql()
         {
             var from = m_from.SQL;
-            return $"{from} WHERE {m_conditions.FirstOrDefault()}";
+            return $"{from} WHERE {GetConditions()}";
+        }
+
+        private string GetConditions()
+        {
+            return string.Join(" ", m_conditions);
+        }
+
+        private class Condition
+        {
+            private readonly string m_condition;
+            private readonly ConditionOperator? m_operator;
+
+            public Condition(ConditionOperator conditionInnerOperator, string[] conditions, ConditionOperator? conditionOuterOperator = null)
+                : this(ToCondition(conditionInnerOperator, conditions), conditionOuterOperator)
+            {
+            }
+
+            public Condition(string condition, ConditionOperator? conditionOperator = null)
+            {
+                m_condition = GetValidCondition(condition);
+                m_operator = conditionOperator;
+            }
+
+            private static string GetValidCondition(string condition)
+            {
+                if (string.IsNullOrEmpty(condition))
+                {
+                    condition = "1=1";
+                }
+
+                return condition;
+            }
+
+            private static string ToCondition(ConditionOperator? conditionOperator, params string[] conditions)
+            {
+                var operatorStr = GetOperator(conditionOperator, " {0} ");
+
+                var conditionsSql = string.Join(operatorStr, conditions.Select(GetValidCondition));
+                return conditions?.Length > 1 ? $"({conditionsSql})" : conditionsSql;
+            }
+
+            private static string GetOperator(ConditionOperator? conditionOperator, string format)
+            {
+                var operatorStr = conditionOperator?.ToString().ToUpper();
+                if (conditionOperator.HasValue)
+                {
+                    operatorStr = string.Format(format, operatorStr);
+                }
+
+                return operatorStr;
+            }
+
+            public override string ToString()
+            {
+                var operatorStr = GetOperator(m_operator, "{0} ");
+                return $"{operatorStr}{m_condition}";
+            }
         }
     }
 }

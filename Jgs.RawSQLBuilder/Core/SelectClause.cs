@@ -4,7 +4,7 @@ namespace Jgs.RawSQLBuilder.Core
 {
     public class SelectClause : IFrom
     {
-        private string[] m_fields;
+        private readonly string[] m_fields;
         private string m_tableName;
         private string m_tableAlias;
 
@@ -19,14 +19,19 @@ namespace Jgs.RawSQLBuilder.Core
 
         public IFrom From(string tableName, string alias = null)
         {
-            m_tableAlias = alias;
+            if (string.IsNullOrEmpty(tableName))
+            {
+                throw new System.ArgumentNullException(nameof(tableName));
+            }
+
             m_tableName = tableName;
+            m_tableAlias = alias;
             return this;
         }
 
-        public IWhere Where(params string[] conditions)
+        public IWhere Where(string condition)
         {
-            return new WhereBuilder(this, conditions);
+            return new WhereBuilder(this, condition);
         }
 
         private string GetSql()

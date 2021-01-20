@@ -2,5 +2,8 @@
 {
     public interface IWhere : ISql
     {
+        IWhere And(string conditinon);
+
+        IWhere Or(string condition);
     }
 }

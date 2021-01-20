@@ -4,6 +4,6 @@
     {
         IFrom From(string tableName, string alias = null);
 
-        IWhere Where(params string[] conditions);
+        IWhere Where(string condition);
     }
 }
