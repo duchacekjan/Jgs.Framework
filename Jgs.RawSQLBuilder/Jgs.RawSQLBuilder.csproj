@@ -4,8 +4,4 @@
       <TargetFrameworks>net5.0-windows;netcoreapp31;net48</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
-  </ItemGroup>
-
 </Project>
