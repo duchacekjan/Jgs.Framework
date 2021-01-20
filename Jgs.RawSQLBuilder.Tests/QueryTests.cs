@@ -64,5 +64,28 @@ namespace Jgs.RawSQLBuilder.Tests
 
             actual.Should().Be("SELECT a FROM t WHERE NOT EXISTS (select * from data where data.a=b)");
         }
+
+        [Fact]
+        public void ShouldBeCorrectSelectClauseWithWhereComplexExists()
+        {
+            var actual = Query
+                .Select("a")
+                .From("t")
+                .Where("1=0").AndNotExists("a").OrExists("b")
+                .SQL;
+
+            actual.Should().Be("SELECT a FROM t WHERE 1=0 AND (NOT EXISTS (a)) OR (EXISTS (b))");
+        }
+
+        [Fact]
+        public void ShouldBeCorrectSelectClauseWithDistinct()
+        {
+            var actual = Query
+                .SelectDistinct("a")
+                .From("t")
+                .SQL;
+
+            actual.Should().Be("SELECT DISTINCT a FROM t");
+        }
     }
 }

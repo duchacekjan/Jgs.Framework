@@ -46,6 +46,42 @@ namespace Jgs.RawSQLBuilder.Core
             return this;
         }
 
+        public IWhere AndExists(string selectQuery)
+        {
+            return Exists(ConditionOperator.And, false, selectQuery);
+        }
+
+        public IWhere AndNotExists(string selectQuery)
+        {
+            return Exists(ConditionOperator.And, true, selectQuery);
+        }
+
+        public IWhere OrExists(string selectQuery)
+        {
+            return Exists(ConditionOperator.Or, false, selectQuery);
+        }
+
+        public IWhere OrNotExists(string selectQuery)
+        {
+            return Exists(ConditionOperator.Or, true, selectQuery);
+        }
+
+        private IWhere Exists(ConditionOperator conditionOperator, bool negate, string selectQuery)
+        {
+            if (string.IsNullOrEmpty(selectQuery))
+            {
+                throw new ArgumentNullException(nameof(selectQuery));
+            }
+            var not = string.Empty;
+            if (negate)
+            {
+                not = "NOT ";
+            }
+            var exists = $"({not}EXISTS ({selectQuery}))";
+            Add(null, conditionOperator, exists);
+            return this;
+        }
+
         private void Add(ConditionOperator? conditionInnerOperator, ConditionOperator? conditionOuterOperator, params string[] conditions)
         {
             m_conditions.Add(new Condition(conditionInnerOperator ?? ConditionOperator.And, conditions, conditionOuterOperator));

@@ -2,14 +2,16 @@
 
 namespace Jgs.RawSQLBuilder.Core
 {
-    public class SelectClause : IFrom
+    internal class SelectClause : IFrom
     {
+        private readonly bool m_isDistinct;
         private readonly string[] m_fields;
         private string m_tableName;
         private string m_tableAlias;
 
-        public SelectClause(params string[] fields)
+        public SelectClause(bool isDistinct, params string[] fields)
         {
+            m_isDistinct = isDistinct;
             m_fields = fields;
         }
 
@@ -69,7 +71,13 @@ namespace Jgs.RawSQLBuilder.Core
                 tableName += $" as {m_tableAlias}";
             }
 
-            return $"SELECT {fieldsSql} FROM {tableName}";
+            var distinct = "";
+            if (m_isDistinct)
+            {
+                distinct = " DISTINCT";
+            }
+
+            return $"SELECT{distinct} {fieldsSql} FROM {tableName}";
         }
     }
 }
