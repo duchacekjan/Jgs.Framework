@@ -2,20 +2,10 @@
 {
     public interface IWhere : ISql
     {
-        IWhere And(string conditinon);
+        IWhereBuilder Where(string condition);
 
-        IWhere And(ConditionOperator operatorBetweenConditions, params string[] conditions);
+        IWhereBuilder WhereExists(string selectQuery);
 
-        IWhere AndExists(string selectQuery);
-
-        IWhere AndNotExists(string selectQuery);
-
-        IWhere Or(string condition);
-
-        IWhere Or(ConditionOperator operatorBetweenConditions, params string[] conditions);
-
-        IWhere OrExists(string selectQuery);
-
-        IWhere OrNotExists(string selectQuery);
+        IWhereBuilder WhereNotExists(string selectQuery);
     }
 }

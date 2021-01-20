@@ -7,11 +7,7 @@ namespace Jgs.RawSQLBuilder
     {
         public static IFrom Select(params string[] fields)
         {
-            return new SelectClause(false, fields);
-        }
-        public static IFrom SelectDistinct(params string[] fields)
-        {
-            return new SelectClause(true, fields);
+            return new SelectClause(fields);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Jgs.RawSQLBuilder.Core;
 using Xunit;
 
 namespace Jgs.RawSQLBuilder.Tests
