@@ -10,8 +10,6 @@
 
         ISelectBase Distinct(string field, params string[] fields);
 
-        ISelectCount Count(string field);
-
         ISelectCount CountDistinct(string field);
     }
 
@@ -19,12 +17,14 @@
     {
         ISelectField Field(string field);
 
+        ISelectCount Count(string field);
+
         IFrom Fields(string field, params string[] fields);
     }
 
     public interface ISelectField : ISelectAlias, IFrom
     {
-        ISelectCount Count(string field, params string[] fields);
+        ISelectCount Count(string field);
     }
 
     public interface ISelectCount : ISelectBase, ISelectAlias

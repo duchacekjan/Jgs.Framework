@@ -7,12 +7,12 @@ namespace Jgs.RawSQLBuilder
     {
         public static IFrom Select(string field, params string[] fields)
         {
-            return new SelectClause(field, fields);
+            return Select().Fields(field, fields);
         }
 
         public static ISelect Select()
         {
-            throw new System.NotImplementedException();
+            return new SelectClauseEx();
         }
     }
 }
