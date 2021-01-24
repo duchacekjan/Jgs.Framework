@@ -31,12 +31,14 @@ namespace Jgs.RawSQLBuilder.Core
 
         public ISelectCount CountDistinct(string field)
         {
-            throw new System.NotImplementedException();
+            var distinctField = GetField(field, null);
+            return new SelectCountBuilder(this, distinctField);
         }
 
         public ISelectBase Distinct(string field, params string[] fields)
         {
-            AddFields(GetDistinctField(field, fields));
+            var distinctField = GetField(field, fields);
+            AddFields(distinctField);
             return this;
         }
 
@@ -78,7 +80,7 @@ namespace Jgs.RawSQLBuilder.Core
             }
         }
 
-        private static string GetDistinctField(string field, string[] fields)
+        private static string GetField(string field, string[] fields)
         {
             field.ValidateNotEmptyString(nameof(field));
             var allFields = new List<string>

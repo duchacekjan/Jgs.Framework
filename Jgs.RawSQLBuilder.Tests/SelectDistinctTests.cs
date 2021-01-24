@@ -20,5 +20,12 @@ namespace Jgs.RawSQLBuilder.Tests
                 .From("t").SQL;
             actual.Should().Be("SELECT DISTINCT a as x, b as y, c as z, d as q FROM t");
         }
+
+        [Fact]
+        public void CorrectSelectCountDistinct()
+        {
+            var actual = Query.Select().CountDistinct("a").Field("b").As("x").From("t").SQL;
+            actual.Should().Be("SELECT COUNT(DISTINCT a), b as x FROM t");
+        }
     }
 }
