@@ -75,19 +75,5 @@ namespace Jgs.RawSQLBuilder.Tests
 
             actual.Should().Be("SELECT a FROM t WHERE 1=0 AND (NOT EXISTS (a)) OR (EXISTS (b))");
         }
-
-        [Fact]
-        public void ShouldBeCorrectSelectClauseWithDistinct()
-        {
-            Query.Select().All();
-            Query.Select().Distinct("a").Field("b").As("x").Fields("h");
-            Query.Select().Count("a").Field("");
-            //var actual = Query
-            //    .SelectDistinct("a")
-            //    .From("t")
-            //    .SQL;
-
-            //actual.Should().Be("SELECT DISTINCT a FROM t");
-        }
     }
 }

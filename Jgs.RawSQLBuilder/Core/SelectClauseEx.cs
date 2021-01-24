@@ -1,4 +1,5 @@
 ﻿using Jgs.RawSQLBuilder.Core.Interfaces;
+using Jgs.RawSQLBuilder.Strings;
 using System;
 using System.Collections.Generic;
 
@@ -35,7 +36,8 @@ namespace Jgs.RawSQLBuilder.Core
 
         public ISelectBase Distinct(string field, params string[] fields)
         {
-            throw new System.NotImplementedException();
+            AddFields(GetDistinctField(field, fields));
+            return this;
         }
 
         public ISelectField Field(string field)
@@ -74,6 +76,27 @@ namespace Jgs.RawSQLBuilder.Core
             {
                 m_fields.AddRange(fields);
             }
+        }
+
+        private static string GetDistinctField(string field, string[] fields)
+        {
+            field.ValidateNotEmptyString(nameof(field));
+            var allFields = new List<string>
+            {
+                field
+            };
+
+            if (fields?.Length > 0)
+            {
+                allFields.AddRange(fields);
+            }
+
+            var result = string.Empty;
+            if (allFields.Count > 0)
+            {
+                result = $"DISTINCT {string.Join(", ", allFields)}";
+            }
+            return result;
         }
 
         private string GetSql()
