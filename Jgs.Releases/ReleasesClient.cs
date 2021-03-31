@@ -124,8 +124,10 @@ namespace JgsReleases
                 throw new ArgumentOutOfRangeException(nameof(key));
             }
 
-            var json = Convert.FromBase64String(key);
-            return System.Text.Json.JsonSerializer.Deserialize<Key>(json)
+            //var json = Convert.FromBase64String(key);
+            //return System.Text.Json.JsonSerializer.Deserialize<Key>(json)
+            //    ?? throw new ArgumentOutOfRangeException(nameof(key));
+            return System.Text.Json.JsonSerializer.Deserialize<Key>(key)
                 ?? throw new ArgumentOutOfRangeException(nameof(key));
         }
     }

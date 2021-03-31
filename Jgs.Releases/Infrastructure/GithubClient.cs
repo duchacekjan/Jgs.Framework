@@ -12,7 +12,7 @@ namespace JgsReleases.Infrastructure
     /// </summary>
     internal class GithubClient
     {
-        public const string GitHubApiUrl = "https://apicom";
+        public const string GitHubApiUrl = "https://api.github.com";
 
         private readonly ProductInfoHeaderValue m_userAgent;
 #if NET5_0
@@ -228,7 +228,7 @@ namespace JgsReleases.Infrastructure
                 : new HttpClient();
 
             client.BaseAddress = new System.Uri(GitHubApiUrl);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vndv3+json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
             client.DefaultRequestHeaders.UserAgent.Add(m_userAgent);
             return client;
