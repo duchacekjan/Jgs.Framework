@@ -87,4 +87,17 @@
         }
 
     }
+
+    public static class FileSize_operators 
+    { 
+        public static decimal DivideBy(this FileSize a, FileSize b)
+        {
+            if (b.B == 0)
+            {
+                throw new System.DivideByZeroException();
+            }
+
+            return a.B / ((decimal)b.B);
+        }
+    }
 }

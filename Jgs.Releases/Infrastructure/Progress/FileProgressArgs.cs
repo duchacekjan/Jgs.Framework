@@ -81,7 +81,7 @@ namespace JgsReleases.Infrastructure.Progress
         {
             Processed = processed;
             Speed = speed;
-            Percentage = Processed / Expected;
+            Percentage = Processed.DivideBy(Expected);
             Message = string.Empty;
             ReportProgress(this);
         }
