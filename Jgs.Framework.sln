@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.UI", "Jgs.UI\Jgs.UI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.Demo", "Jgs.Demo\Jgs.Demo.csproj", "{6A3F0A81-BA2A-4AB5-B66D-279023F2ED5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.RawSQLBuilder", "Jgs.RawSQLBuilder\Jgs.RawSQLBuilder.csproj", "{F5BD1916-4D85-4458-AC38-AA389A80CA2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.RawSQLBuilder", "Jgs.RawSQLBuilder\Jgs.RawSQLBuilder.csproj", "{F5BD1916-4D85-4458-AC38-AA389A80CA2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Releases", "Jgs.Releases\Jgs.Releases.csproj", "{D36F275B-6724-447C-B933-8CFCFDA39172}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F5BD1916-4D85-4458-AC38-AA389A80CA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5BD1916-4D85-4458-AC38-AA389A80CA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5BD1916-4D85-4458-AC38-AA389A80CA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D36F275B-6724-447C-B933-8CFCFDA39172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D36F275B-6724-447C-B933-8CFCFDA39172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D36F275B-6724-447C-B933-8CFCFDA39172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D36F275B-6724-447C-B933-8CFCFDA39172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
