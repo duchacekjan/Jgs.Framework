@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jgs.RawSQLBuilder", "Jgs.Ra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Releases", "Jgs.Releases\Jgs.Releases.csproj", "{D36F275B-6724-447C-B933-8CFCFDA39172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jgs.Releases.Demo", "Jgs.Releases.Demo\Jgs.Releases.Demo.csproj", "{7D738400-F39E-4615-A62A-9B41A4C39783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D36F275B-6724-447C-B933-8CFCFDA39172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36F275B-6724-447C-B933-8CFCFDA39172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36F275B-6724-447C-B933-8CFCFDA39172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D738400-F39E-4615-A62A-9B41A4C39783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D738400-F39E-4615-A62A-9B41A4C39783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D738400-F39E-4615-A62A-9B41A4C39783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D738400-F39E-4615-A62A-9B41A4C39783}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
