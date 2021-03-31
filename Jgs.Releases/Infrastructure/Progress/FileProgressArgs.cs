@@ -18,6 +18,7 @@ namespace JgsReleases.Infrastructure.Progress
             Message = string.Empty;
             Speed = 0;
             FileInfo = new FileInfo();
+            ReportProgress = delegate { };
         }
 
         /// <summary>
@@ -43,17 +44,22 @@ namespace JgsReleases.Infrastructure.Progress
         /// <summary>
         /// Percentage of done
         /// </summary>
-        public int Percentage => (int)System.Math.Round((decimal)((Processed / Expected) * 100));
+        public decimal Percentage { get; private set; }
 
         /// <summary>
         /// Has error
         /// </summary>
         public bool HasError { get; private set; }
-        
+
         /// <summary>
         /// Custom message
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Event to report progress
+        /// </summary>
+        public FileProgressHandler ReportProgress { get; set; }
 
         /// <summary>
         /// Set data when error occured
@@ -63,6 +69,7 @@ namespace JgsReleases.Infrastructure.Progress
         {
             Message = message;
             HasError = true;
+            ReportProgress(this);
         }
 
         /// <summary>
@@ -74,7 +81,9 @@ namespace JgsReleases.Infrastructure.Progress
         {
             Processed = processed;
             Speed = speed;
+            Percentage = Processed / Expected;
             Message = string.Empty;
+            ReportProgress(this);
         }
 
         /// <summary>
@@ -84,8 +93,8 @@ namespace JgsReleases.Infrastructure.Progress
         public override string ToString()
         {
             return HasError
-                ?$"{FileInfo}\tERROR --> {Message}"
-                :$"{FileInfo} --> {Percentage}% ({Speed})";
+                ? $"{FileInfo}\tERROR --> {Message}"
+                : $"{FileInfo} --> {Processed}/{Expected}\t{Percentage:P} ({Speed})";
         }
     }
 }

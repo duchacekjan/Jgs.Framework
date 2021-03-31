@@ -128,7 +128,8 @@ namespace JgsReleases.Infrastructure.Builders.Download
                     FileName = fileName,
                     Index = fileIndex,
                     TotalFiles = fileCount
-                }
+                },
+                ReportProgress = Progress
             };
             try
             {

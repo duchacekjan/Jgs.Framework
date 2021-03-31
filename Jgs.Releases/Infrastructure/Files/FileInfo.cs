@@ -10,7 +10,8 @@
 
         public override string ToString()
         {
-            return $"{FileName} ({Index}/{TotalFiles})";
+            var onlyFileName = System.IO.Path.GetFileName(FileName);
+            return $"{onlyFileName} ({Index}/{TotalFiles})";
         }
     }
 }
