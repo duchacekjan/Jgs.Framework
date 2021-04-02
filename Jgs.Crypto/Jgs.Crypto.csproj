@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
       <TargetFrameworks>net5.0-windows;netcoreapp3.1;net48</TargetFrameworks>
-      <Version>2.0.0</Version>
+      <Version>2.0.1</Version>
       <Authors>Jgs</Authors>
       <Description>Crypto library</Description>
       <Copyright>Jgs(c)</Copyright>
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

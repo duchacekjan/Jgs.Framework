@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="jgs:wpf.controls"
         mc:Ignorable="d"
+        Background="Wheat"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <c:BrowseInput VerticalAlignment="Center"
                        Label="Vstup"/>
+        <c:PageNavigator Grid.Row="1"
+                         TotalPages="3"
+                         CurrentPage="1"
+                         VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

@@ -40,5 +40,18 @@ namespace Jgs.Thread.Interfaces
         /// <param name="param">Parametr funkce</param>
         /// <returns></returns>
         IBackgroundExecutorFunction<TResult> Do<T, TResult>(Func<T, TResult> workFunction, T param);
+
+        /// <summary>
+        /// Vyvolá akci na UI vlákně
+        /// </summary>
+        /// <param name="action">Akce</param>
+        /// <param name="parameter">Parametr akce</param>
+        void PostToUi<T>(Action<T> action, T parameter);
+
+        /// <summary>
+        /// Vyvolá akci na UI vlákně
+        /// </summary>
+        /// <param name="action">Akce</param>
+        void PostToUi(Action action);
     }
 }

@@ -4,17 +4,17 @@
     <TargetFrameworks>net5.0-windows;netcoreapp3.1;net48</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Jgs</Authors>
     <Description>WPF UI components</Description>
     <Copyright>Jgs(c)</Copyright>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(Configuration)' != 'Release'">
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <ProjectReference Include="..\Jgs.Thread\Jgs.Thread.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="Jgs.Thread" Version="2.0.0" />
+    <PackageReference Include="Jgs.Thread" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
