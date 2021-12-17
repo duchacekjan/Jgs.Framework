@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jgs.UI.GridLayoutManager
+namespace Jgs.UI.GridLayout
 {
-    public class LayoutArgumentCollection
+    public abstract class LayoutArgumentCollection
     {
 #if NET6_0
-        private readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues<LayoutArgumentType>()
+        protected readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues<LayoutArgumentType>()
                 .ToDictionary(key => key, value => (int?)null);
 #else
         private readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues(typeof(LayoutArgumentCollection))
@@ -15,16 +15,9 @@ namespace Jgs.UI.GridLayoutManager
             .ToDictionary(key => key, value => (int?)null);
 #endif
 
-
-        public int? CompactSize => m_arguments[LayoutArgumentType.Compact];
-
-        public int? WideSize => m_arguments[LayoutArgumentType.Wide];
-
-        public int? StandardSize => m_arguments[LayoutArgumentType.Standard];
-
         public LayoutArgumentCollection(string arguments)
         {
-            if (string.IsNullOrEmpty(arguments))
+            if (!string.IsNullOrEmpty(arguments))
             {
                 Parse(arguments);
             }

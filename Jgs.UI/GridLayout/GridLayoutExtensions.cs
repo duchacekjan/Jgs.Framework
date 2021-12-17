@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jgs.UI.GridLayoutManager
+namespace Jgs.UI.GridLayout
 {
-    public static class LayoutArgumentCollectionExtensions
+    public static class GridLayoutExtensions
     {
 
         internal static string[] GetParts(this string value, string separator)

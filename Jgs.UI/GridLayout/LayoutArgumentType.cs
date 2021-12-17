@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jgs.UI.GridLayoutManager
+namespace Jgs.UI.GridLayout
 {
     public enum LayoutArgumentType
     {
