@@ -9,9 +9,9 @@ namespace Jgs.UI.GridLayout
         internal static string[] GetParts(this string value, string separator)
         {
 #if NET48
-            return value.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            return value.Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
 #else
-            return value.Split(".");
+            return value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 #endif
         }
 

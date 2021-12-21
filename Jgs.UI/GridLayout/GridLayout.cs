@@ -11,12 +11,18 @@ namespace Jgs.UI.GridLayout
         private const string RowSpan = nameof(RowSpan);
         private const string ColumnSpan = nameof(ColumnSpan);
         private const string IsEnabled = nameof(IsEnabled);
+        private const string IsChildEnabled = nameof(IsChildEnabled);
 
         public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.RegisterAttached(
             IsEnabled, 
             typeof(bool), 
             typeof(GridLayout), 
             new FrameworkPropertyMetadata(false, IsEnabledChanged));
+        public static readonly DependencyProperty IsChildEnabledProperty = DependencyProperty.RegisterAttached(
+            IsChildEnabled,
+            typeof(bool),
+            typeof(GridLayout),
+            new FrameworkPropertyMetadata(true, IsChildEnabledChanged));
 
         public static readonly DependencyProperty LimitsProperty = Register(Limits, LayoutChanged);
         public static readonly DependencyProperty ColumnProperty = Register(Column, LayoutChanged);
@@ -40,14 +46,24 @@ namespace Jgs.UI.GridLayout
             return new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, callback);
         }
 
-        public static bool GetIsEnabled(FrameworkElement element)
+        public static bool GetIsEnabled(Grid element)
         {
             return (bool)element.GetValue(IsEnabledProperty);
         }
 
-        public static void SetIsEnabled(FrameworkElement element, bool value)
+        public static void SetIsEnabled(Grid element, bool value)
         {
             element.SetValue(IsEnabledProperty, value);
+        }
+
+        public static bool GetIsChildEnabled(FrameworkElement element)
+        {
+            return (bool)element.GetValue(IsChildEnabledProperty);
+        }
+
+        public static void SetIsChildEnabled(FrameworkElement element, bool value)
+        {
+            element.SetValue(IsChildEnabledProperty, value);
         }
 
         public static void SetLimits(Grid element, string value)

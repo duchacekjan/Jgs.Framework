@@ -16,39 +16,33 @@ namespace Jgs.UI.GridLayout
 
         private static void IsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            switch (d)
+            if (d is Grid grid)
             {
-                case Grid grid:
-                    IsEnabledGridChanged(grid, e.OldValue, e.NewValue);
-                    break;
-                case FrameworkElement element:
-                    IsEnabledElementChanged(element);
-                    break;
+                if (e.OldValue is bool oldAttached && oldAttached)
+                {
+                    grid.SizeChanged -= OnGridSizeChanged;
+                }
+
+                if (e.NewValue is bool newAttached && newAttached)
+                {
+                    grid.SizeChanged += OnGridSizeChanged;
+                }
+
+                SetLayout(grid);
             }
         }
 
-        private static void IsEnabledElementChanged(FrameworkElement element)
+        private static void IsChildEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (element.Parent is Grid elementsGrid)
+            if (d is FrameworkElement element)
             {
-                SetLayout(elementsGrid, element);
+                if (element.Parent is Grid elementsGrid)
+                {
+                    SetLayout(elementsGrid, element);
+                }
             }
         }
 
-        private static void IsEnabledGridChanged(Grid grid, object oldValue, object newValue)
-        {
-            if (oldValue is bool oldAttached && oldAttached)
-            {
-                grid.SizeChanged -= OnGridSizeChanged;
-            }
-
-            if (newValue is bool newAttached && newAttached)
-            {
-                grid.SizeChanged += OnGridSizeChanged;
-            }
-
-            SetLayout(grid);
-        }
         private static void OnGridSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (sender is Grid grid && e.WidthChanged)
@@ -72,7 +66,7 @@ namespace Jgs.UI.GridLayout
 
         private static void SetLayout(Grid grid, FrameworkElement element)
         {
-            if (GetIsEnabled(grid) && GetIsEnabled(element))
+            if (GetIsEnabled(grid) && GetIsChildEnabled(element))
             {
                 var limits = getCurrentLimits(grid);
                 var state = limits.GetLayoutType(grid.ActualWidth);
@@ -128,7 +122,7 @@ namespace Jgs.UI.GridLayout
         {
             foreach (var child in grid.Children)
             {
-                if (child is FrameworkElement element && GetIsEnabled(element))
+                if (child is FrameworkElement element && GetIsChildEnabled(element))
                 {
                     action?.Invoke(element, type);
                 }

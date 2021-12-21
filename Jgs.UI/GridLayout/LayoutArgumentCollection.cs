@@ -23,7 +23,7 @@ namespace Jgs.UI.GridLayout
             }
         }
 
-        public void Parse(string arguments)
+        private void Parse(string arguments)
         {
             var parts = arguments.GetParts(".");
             foreach (var part in parts)
