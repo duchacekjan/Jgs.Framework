@@ -10,7 +10,7 @@ namespace Jgs.UI.GridLayout
         protected readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues<LayoutArgumentType>()
                 .ToDictionary(key => key, value => (int?)null);
 #else
-        private readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues(typeof(LayoutArgumentCollection))
+        protected readonly IDictionary<LayoutArgumentType, int?> m_arguments = Enum.GetValues(typeof(LayoutArgumentCollection))
             .OfType<LayoutArgumentType>()
             .ToDictionary(key => key, value => (int?)null);
 #endif
