@@ -4,10 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="jgs:wpf.controls"
+        xmlns:g="jgs:wpf.grid.layout"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <c:BrowseInput VerticalAlignment="Center"
+    <Grid g:GridLayout.IsEnabled="True"
+          Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <c:BrowseInput g:GridLayout.Column=".c-0.s-0.w-0"
+                       g:GridLayout.ColumnSpan=".c-4.s-2.w-1"
+                       VerticalAlignment="Center"
                        Label="Vstup"/>
+        <TextBlock Text="TEST"
+                   g:GridLayout.Column=".c-0.s-2.w-1"
+                   g:GridLayout.ColumnSpan=".c-4.s-2.w-1"
+                   g:GridLayout.Row=".c-1.s-0.w-0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   Background="LightBlue"/>
     </Grid>
 </Window>

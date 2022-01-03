@@ -11,6 +11,7 @@ using System.Windows.Markup;
 )]
 
 [assembly: XmlnsDefinition("jgs:wpf.controls", "Jgs.UI.Components")]
+[assembly: XmlnsDefinition("jgs:wpf.grid.layout", "Jgs.UI.GridLayout")]
 [assembly: XmlnsDefinition("jgs:wpf.converters", "Jgs.UI.Converters")]
 [assembly: XmlnsDefinition("jgs:wpf.extensions", "Jgs.UI.Extensions")]
 [assembly: XmlnsDefinition("jgs:wpf.markup", "Jgs.UI.Markup")]
