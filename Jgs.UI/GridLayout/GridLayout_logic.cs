@@ -88,34 +88,10 @@ namespace Jgs.UI.GridLayout
 
         private static void SetElementLayout(FrameworkElement element, LayoutArgumentType type)
         {
-            var column = new LayoutValueCollection(GetColumn(element));
-            var columnSpan = new LayoutValueCollection(GetColumnSpan(element));
-            var row = new LayoutValueCollection(GetRow(element));
-            var rowSpan = new LayoutValueCollection(GetRowSpan(element));
-            SetColumnAndSpan(element, column.GetSize(type), columnSpan.GetSize(type), row.GetSize(type), rowSpan.GetSize(type));
-        }
-
-        private static void SetColumnAndSpan(FrameworkElement element, int? column, int? columnSpan, int? row, int? rowSpan)
-        {
-            if (column.HasValue)
-            {
-                element.SetValue(Grid.ColumnProperty, column);
-            }
-
-            if (columnSpan.HasValue)
-            {
-                element.SetValue(Grid.ColumnSpanProperty, columnSpan);
-            }
-
-            if (row.HasValue)
-            {
-                element.SetValue(Grid.RowProperty, row);
-            }
-
-            if (rowSpan.HasValue)
-            {
-                element.SetValue(Grid.RowSpanProperty, rowSpan);
-            }
+            element.SetGridLayoutValue(ColumnProperty, type);
+            element.SetGridLayoutValue(RowProperty, type);
+            element.SetGridLayoutValue(ColumnSpanProperty, type);
+            element.SetGridLayoutValue(RowSpanProperty, type);
         }
 
         private static void UpdateLayout(Grid grid, LayoutArgumentType type, Action<FrameworkElement, LayoutArgumentType> action)

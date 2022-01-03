@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Jgs.UI.GridLayout
@@ -14,9 +15,9 @@ namespace Jgs.UI.GridLayout
         private const string IsChildEnabled = nameof(IsChildEnabled);
 
         public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.RegisterAttached(
-            IsEnabled, 
-            typeof(bool), 
-            typeof(GridLayout), 
+            IsEnabled,
+            typeof(bool),
+            typeof(GridLayout),
             new FrameworkPropertyMetadata(false, IsEnabledChanged));
         public static readonly DependencyProperty IsChildEnabledProperty = DependencyProperty.RegisterAttached(
             IsChildEnabled,
@@ -35,6 +36,13 @@ namespace Jgs.UI.GridLayout
 #else
         public static readonly LayoutLimitCollection DefaultLimits = new LayoutLimitCollection(".c-700.s-1920");
 #endif
+        public static readonly IDictionary<DependencyProperty, DependencyProperty> ToGridPropertiesMap = new Dictionary<DependencyProperty, DependencyProperty>
+        {
+            { ColumnProperty, Grid.ColumnProperty },
+            { RowProperty, Grid.RowProperty },
+            { ColumnSpanProperty, Grid.ColumnSpanProperty },
+            { RowSpanProperty, Grid.RowSpanProperty }
+        };
 
         private static DependencyProperty Register(string propertyName, PropertyChangedCallback callback)
         {
