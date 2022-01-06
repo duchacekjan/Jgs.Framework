@@ -9,8 +9,12 @@
             Both
         }
 
-        public static string ToSql(this string text)
+        public static string ToSql(this string text, bool allowNullOrEmpty = true)
         {
+            if (!allowNullOrEmpty)
+            {
+                text.ValidateNotEmptyString(nameof(text));
+            }
             return $"'{text}'";
         }
 
@@ -29,6 +33,14 @@
             return fieldName.SqlLike(value, LikeWildCardPosition.End, wildCard);
         }
 
+        public static void ValidateNotEmptyString(this string value, string fieldName)
+        {
+            if (string.IsNullOrEmpty(value?.Trim()))
+            {
+                throw new System.ArgumentException("Argument is null or empty", fieldName);
+            }
+        }
+
         private static string SqlLike(this string fieldName, string value, LikeWildCardPosition position, string wildCard)
         {
             fieldName.ValidateNotEmptyString(nameof(fieldName));
@@ -36,14 +48,6 @@
             wildCard.ValidateNotEmptyString(nameof(wildCard));
             var likeFormat = GetLikeFormat(position, value, wildCard);
             return $"{fieldName} LIKE '{likeFormat}'";
-        }
-
-        public static void ValidateNotEmptyString(this string value, string fieldName)
-        {
-            if (string.IsNullOrEmpty(value?.Trim()))
-            {
-                throw new System.ArgumentNullException(fieldName);
-            }
         }
 
         private static object GetLikeFormat(LikeWildCardPosition position, string value, string wildCard)

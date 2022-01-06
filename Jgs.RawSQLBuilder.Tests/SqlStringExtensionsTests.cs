@@ -18,6 +18,27 @@ namespace Jgs.RawSQLBuilder.Tests
         }
 
         [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void StringToSqlIsEmptyAllowed(string value)
+        {
+            const string expected = "''";
+            var actual = value.ToSql();
+            actual.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void StringToSqlIsEmptyNotAllowed(string value)
+        {
+            Action sut = () => { value.ToSql(false); };
+            sut.Should()
+                .Throw<ArgumentException>("Null or empty argument is not allowed.");
+        }
+
+
+        [Theory]
         [InlineData("%")]
         [InlineData("*")]
         public void CorrectStringContainsToSql(string wildCard)
@@ -72,9 +93,9 @@ namespace Jgs.RawSQLBuilder.Tests
         [InlineData(null, "", "")]
         public void IncorrectWildCardInStringContainsToSql(string field, string value, string wildCard)
         {
-            field.Invoking(i => i.SqlContains(value, wildCard))
-                .Should()
-                .Throw<ArgumentNullException>("Wild card is not defined.");
+            Action sut = () => { field.SqlContains(value, wildCard); };
+            sut.Should()
+                .Throw<ArgumentException>("Wild card is not defined.");
         }
     }
 }
